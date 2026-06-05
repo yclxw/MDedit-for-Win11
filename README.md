@@ -1,450 +1,223 @@
-MD 文本编辑器
-=============
+﻿<h1 align="center">MD编辑器 for Win11</h1>
 
-适用于 Windows 的桌面 Markdown 编辑工具，基于 .NET 10 + WPF。
+<p align="center">
+  <strong>Windows 11 原生 Markdown 所见即所得编辑器</strong>
+</p>
 
-当前版本：**v2.57.202605242121** — [VERSION.md](VERSION.md) · [CHANGELOG.md](CHANGELOG.md) · [BACKUP.md](BACKUP.md)
+<p align="center">
+  <img src="https://img.shields.io/badge/版本-v3.7-0969DA?style=flat-square" alt="版本" />
+  <img src="https://img.shields.io/badge/平台-Windows%2011-0078D4?style=flat-square&logo=windows" alt="平台" />
+  <img src="https://img.shields.io/badge/框架-.NET%2010-512BD4?style=flat-square&logo=dotnet" alt="框架" />
+  <img src="https://img.shields.io/badge/语言-C%23%2012-239120?style=flat-square&logo=csharp" alt="语言" />
+  <img src="https://img.shields.io/badge/许可-Proprietary-red?style=flat-square" alt="许可" />
+  <img src="https://img.shields.io/badge/架构-x64-blue?style=flat-square" alt="架构" />
+</p>
 
-----
+<p align="center">
+  <a href="#-简介">📖 简介</a> ·
+  <a href="#-特性">✨ 特性</a> ·
+  <a href="#-快速开始">🚀 快速开始</a> ·
+  <a href="#-系统需求">💻 系统需求</a> ·
+  <a href="#-技术栈">🛠 技术栈</a> ·
+  <a href="#-快捷键">⌨️ 快捷键</a> ·
+  <a href="#-文档">📚 文档</a> ·
+  <a href="#-项目结构">📁 结构</a>
+</p>
 
-目录
-====
+---
 
-1. [概述](#1-概述)
-2. [功能特性](#2-功能特性)
-3. [系统需求](#3-系统需求)
-4. [快速上手](#4-快速上手)
-5. [视图模式](#5-视图模式)
-6. [快捷键](#6-快捷键)
-7. [配置项](#7-配置项)
-8. [源码结构](#8-源码结构)
-9. [技术架构](#9-技术架构)
-10. [构建](#10-构建)
-11. [开发环境](#11-开发环境)
-12. [已知问题](#12-已知问题)
-13. [作者](#13-作者)
+## 📖 简介
 
-----
+**MD编辑器 for Win11** 是一款面向 Windows 11 的原生 Markdown 桌面编辑器，采用 **WPF** 框架和 **WebView2 Chromium** 预览引擎构建。
 
-1. 概述
-====
+> **设计哲学**：像浏览器一样管理文档。关闭窗口静默缓存全部标签页，下次打开完整恢复。仅在用户主动关闭单个标签页时才询问保存。
 
-MD 文本编辑器（以下简称 MDEditor）是一款面向技术写作与文档编辑场景的桌面 Markdown 编辑器。提供多标签页编辑、实时 HTML 预览、七种视图布局，以及 40+ 键盘快捷键。
+---
 
-**适用场景:**
+## ✨ 特性
 
-- 编写 README、API 文档、技术笔记
-- 离线 Markdown 写作与导出
-- 文件夹工作区下的批量文档浏览
+### 核心体验
+| 特性 | 说明 |
+|------|------|
+| 🔄 **浏览器式会话恢复** | 关闭窗口自动缓存全部标签页（含修改未保存），下次启动完整恢复至光标位置 |
+| 📝 **多标签页编辑** | 无限标签页，拖放文件即打开，支持关闭/关闭其他/关闭全部 |
+| 👁️ **Chromium 实时预览** | WebView2 引擎 + GitHub Primer CSS，保存后即时刷新 |
+| 🎨 **GitHub Primer 主题** | 亮/暗双主题即时切换（Ctrl+Shift+D），12 个设计 Token 统一管理 |
 
-----
+### 编辑体验
+| 特性 | 说明 |
+|------|------|
+| 🏷️ **7 种视图布局** | 完整视图 · 仅预览 · 仅源码 · 双栏左右 · 双栏上下 · 标准视图 · 个性视图 |
+| 🧰 **32 按钮工具栏** | 48×48 ICO 四色变体图标，6 组功能分区，自动适配亮/暗主题 |
+| ⌨️ **40+ 快捷键** | Ctrl+←→ 标题升降、Ctrl+↑↓ 行移动、Ctrl+Shift+1~6 标题级别 |
+| 📋 **三格式剪贴板** | 复制同时含 Markdown 源码 + HTML 渲染 + 纯文本 |
 
-2. 功能特性
-====
+### 文件与工具
+| 特性 | 说明 |
+|------|------|
+| 📂 **文件树+大纲** | 工作区文件导航 + 标题大纲快速跳转 |
+| 🔍 **查找替换** | 非模态窗口，支持正则表达式、大小写匹配 |
+| 🔢 **标题重编号** | 自动添加/移除数字序号（1. / 1.1. / 2.3.1.） |
+| 💾 **多格式导出** | 保存 .md / 导出 .txt / 导出 .html / 批量全部输出 |
 
-文件管理
-----
+### 工程品质
+| 特性 | 说明 |
+|------|------|
+| 🛡️ **安全加固** | 命名管道 ACL、Mutex 单实例、JSON MaxDepth、原子写入 |
+| 📦 **便携单文件** | 自包含发布（~186 MB），无需安装 .NET 运行时 |
+| 🌐 **编码兼容** | BOM 自动检测（UTF-8/16/32），输出统一 UTF-8 BOM |
+| ⚡ **大文件优化** | >500KB 文件异步加载，UI 线程零阻塞 |
+| 💥 **三级异常保护** | Dispatcher / AppDomain / TaskScheduler 异常统一捕获 |
 
-- 新建、打开、保存 ``.md`` / ``.txt`` 文件
-- 另存为 ``.md``、``.txt``、``.html`` 三种格式
-- 打开文件夹作为工作区，路径自动记忆
-- 多标签页编辑，脏文档 ``*`` 标记
-- 最近文件列表（最多 20 条，去重排序）
-- 打印（调用系统打印对话框）
+---
 
-**单实例机制:**
+## 🚀 快速开始
 
-双击 ``.md`` 文件时，若程序已运行，新文件在当前窗口以标签页打开，不重复启动。
-通过命名 Mutex 检测实例，NamedPipe 跨进程传递路径。
+### 直接运行
 
-**会话恢复:**
+下载 `bak/publish/MD编辑器v3.7.20260603.exe`，双击运行。**无需安装任何运行时**。
 
-窗口关闭时自动保存所有标签页（路径、内容、脏状态、光标位置），
-下次启动自动恢复。与命令行传入的文件同时打开，互不覆盖。
+### 从源码构建
 
-编辑功能
-----
-
-- 撤销/重做、剪切/复制/粘贴（WPF ``TextBox`` 原生支持）
-- 复制为纯文本（剥离 Markdown 语法标记）
-- 复制为 Markdown、复制为 HTML
-- 粘贴为纯文本（剥离外部格式）
-- 查找与替换（区分大小写、正则表达式），F3 查找下一个
-- 跳转到指定行
-
-格式快捷键
-----
-
-| 格式 | 快捷键 | 语法 |
-|------|--------|------|
-| 标题 1–6 | ``Ctrl+Shift+1`` ~ ``Ctrl+Shift+6`` | ``#`` ~ ``######`` |
-| 粗体 | ``Ctrl+B`` | ``**text**`` |
-| 斜体 | ``Ctrl+I`` | ``*text*`` |
-| 删除线 | ``Ctrl+Shift+X`` | ``~~text~~`` |
-| 行内代码 | ``Ctrl+` `` | `` `code` `` |
-| 代码块 | ``Ctrl+Shift+` `` | `` ``` `` |
-| 引用块 | ``Ctrl+Shift+Q`` | ``> quote`` |
-| 无序列表 | ``Ctrl+Shift+U`` | ``- item`` |
-| 有序列表 | ``Ctrl+Shift+N`` | ``1. item`` |
-| 任务列表 | ``Ctrl+Shift+T`` | ``- [ ] task`` |
-| 链接 | ``Ctrl+Shift+K`` | ``[text](url)`` |
-| 图片 | ``Ctrl+Shift+I`` | ``![alt](url)`` |
-| 数学公式 | — | ``$$`` 块 |
-| Mermaid | — | `` ```mermaid `` 块 |
-
-选中文本时自动包裹，无选中时在光标处插入模板。预览采用 150ms 防抖。
-
-工具
-----
-
-- **字数统计:** 统计当前文档字数
-- **TOC 生成:** 扫描标题，生成锚点目录列表
-- **文件关联:** ``HKCU`` 注册表关联 ``.md``（无需管理员权限），支持取消
-
-菜单栏指示器
-----
-
-菜单栏右侧四色切换按钮（20×20px，圆角 3px，默认不透明度 0.7，悬停 1.0）:
-
-| 符号 | 颜色 | 名称 | 功能 |
-|------|------|------|------|
-| ☰ | ``#E74C3C`` | 红 | 侧边栏开关 |
-| ◎ | ``#F1C40F`` | 黄 | 预览区开关 |
-| ◼ | ``#3498DB`` | 蓝 | 编辑区开关 |
-| # | ``#2ECC71`` | 绿 | 行号开关 |
-
-----
-
-3. 系统需求
-====
-
-| 需求项 | 最低要求 |
-|--------|----------|
-| 操作系统 | Windows 10（1809+）或 Windows 11 |
-| CPU 架构 | x64 |
-| 内存 | 512 MB |
-| 磁盘 | 200 MB（自包含版本） |
-| .NET 运行时 | .NET 10（仅框架依赖版需要） |
-
-自包含发布版本内嵌 .NET 运行时，无需系统预装。
-
-----
-
-4. 快速上手
-====
-
-自包含版本
-----
-
-下载 ``MD文本编辑器v{版本号}.exe``，双击运行。无需安装依赖。
-
-从源码运行
-----
-
-```powershell
-# 安装 .NET 10 SDK
+```bash
+# 前置条件：.NET 10 SDK
 winget install --id Microsoft.DotNet.SDK.10 -e
 
-# 获取源码
-git clone <repo-url>
-cd MDEditor
-
-# 还原依赖
+# 克隆并构建
+git clone <repo-url> && cd "MD编辑器 for Win11"
 dotnet restore
-
-# 编译并运行
+dotnet build -c Release
 dotnet run
+
+# 发布自包含 exe
+dotnet publish -c Release -r win-x64 --self-contained true \
+  -p:PublishSingleFile=true -p:PublishReadyToRun=true \
+  -p:IncludeNativeLibrariesForSelfExtract=true -o ./bak/publish
 ```
 
-----
+---
 
-5. 视图模式
-====
+## 💻 系统需求
 
-可用视图（``Ctrl+1`` ~ ``Ctrl+7``）
-----
-
-| 序号 | 模式 | 快捷键 | 布局 |
-|------|------|--------|------|
-| 1 | 完整视图 | ``Ctrl+1`` | 侧边栏 + 编辑区 + 预览区三栏 |
-| 2 | 仅预览 | ``Ctrl+2`` | 全屏预览 |
-| 3 | 仅源码 | ``Ctrl+3`` | 全屏编辑 |
-| 4 | 双栏（左右） | ``Ctrl+4`` | 编辑左 / 预览右，分割线可拖拽 |
-| 5 | 双栏（上下） | ``Ctrl+5`` | 编辑上 / 预览下，分割线可拖拽 |
-| 6 | 标准视图 | ``Ctrl+6`` | 编辑 1/3 + 预览 2/3 |
-| 7 | 个性视图 | ``Ctrl+7`` | 自定义三栏占比（总和 100%） |
-
-默认视图在菜单「视图 → 默认视图设置」中选择，重启生效。
-
-其他视图功能
-----
-
-| 操作 | 快捷键 | 说明 |
-|------|--------|------|
-| 全屏 | ``F11`` | 窗口最大化/还原 |
-| 侧边栏 | ``Ctrl+Shift+B`` | 文件树 + 大纲面板 |
-| 行号 | ``Ctrl+Shift+G`` | 编辑区行号显示 |
-| 深色/浅色主题 | ``Ctrl+Shift+D`` | UI + 预览区同步切换 |
-| 放大/缩小/重置 | ``Ctrl+=`` / ``Ctrl+-`` / ``Ctrl+0`` | 编辑器字体缩放 |
-
-----
-
-6. 快捷键
-====
-
-文件
-----
-
-| 操作 | 快捷键 |
-|------|--------|
-| 新建 | ``Ctrl+N`` |
-| 打开 | ``Ctrl+O`` |
-| 保存 | ``Ctrl+S`` |
-| 另存为 | ``Ctrl+Shift+S`` |
-| 打印 | ``Ctrl+P`` |
-| 关闭标签页 | ``Ctrl+W`` |
-
-编辑
-----
-
-| 操作 | 快捷键 |
-|------|--------|
-| 复制为纯文本 | ``Ctrl+Shift+C`` |
-| 粘贴为纯文本 | ``Ctrl+Shift+V`` |
-| 查找/替换 | ``Ctrl+F`` |
-| 查找下一个 | ``F3`` |
-| 跳转到行 | ``Ctrl+G`` |
-
-``Ctrl+Z``、``Ctrl+Y``、``Ctrl+X``、``Ctrl+C``、``Ctrl+V``、``Ctrl+A``
-由 WPF ``TextBox`` 原生处理，无须代码绑定。
-
-----
-
-7. 配置项
-====
-
-配置文件位于 ``%LOCALAPPDATA%\MDEditor\settings.json``:
-
-```json
-{
-  "IsDarkTheme": false,
-  "AutoSaveEnabled": true,
-  "AutoSaveIntervalMinutes": 5,
-  "RecentFiles": [],
-  "LastOpenedFolder": null,
-  "DefaultView": "FullView",
-  "CustomSidebarRatio": 20,
-  "CustomEditorRatio": 40,
-  "CustomPreviewRatio": 40,
-  "EditorFontFamily": "Consolas",
-  "EditorFontSize": 14
-}
-```
-
-字段说明:
-
-| 字段 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| ``IsDarkTheme`` | bool | false | 深色/浅色主题 |
-| ``AutoSaveEnabled`` | bool | true | 启用自动保存 |
-| ``AutoSaveIntervalMinutes`` | int | 5 | 自动保存间隔（分钟） |
-| ``RecentFiles`` | string[] | [] | 最近文件（最多 20） |
-| ``LastOpenedFolder`` | string? | null | 工作区路径，启动自动恢复 |
-| ``DefaultView`` | string | FullView | 默认视图模式 |
-| ``CustomSidebarRatio`` | int | 20 | 个性视图：侧边栏占比 % |
-| ``CustomEditorRatio`` | int | 40 | 个性视图：编辑区占比 % |
-| ``CustomPreviewRatio`` | int | 40 | 个性视图：预览区占比 % |
-| ``EditorFontFamily`` | string | Consolas | 编辑区字体 |
-| ``EditorFontSize`` | double | 14 | 编辑区字号 |
-
-会话文件 ``%LOCALAPPDATA%\MDEditor\session.json`` 存储标签页状态，
-启动时自动恢复。
-
-删除 ``%LOCALAPPDATA%\MDEditor\`` 恢复全部默认设置。
-
-----
-
-8. 源码结构
-====
-
-```
-.
-├── App.xaml / App.xaml.cs         # 应用入口（单实例、管道、异常处理）
-├── MainWindow.xaml / .cs          # 主窗口（UI、事件、快捷键 1955 行）
-├── FindReplaceWindow.xaml / .cs   # 查找/替换对话框
-├── MDEditor.csproj                # 项目文件（net10.0-windows）
-├── Editor/
-│   └── MarkdownEditor.xaml / .cs  # 自定义编辑器控件（397 行）
-├── Models/
-│   ├── Document.cs                # 文档模型
-│   ├── SessionDocument.cs         # 会话持久化模型
-│   └── ViewLayout.cs              # 视图布局描述结构
-├── Services/
-│   ├── FileManager.cs             # 文件操作服务（91 行）
-│   ├── FileService.cs             # 文件 I/O 底层
-│   ├── ClipboardService.cs        # 剪贴板服务
-│   ├── MarkdownConverter.cs       # Markdown → HTML 渲染器（103 行）
-│   └── SettingsService.cs         # 设置与会话持久化（121 行）
-├── Views/
-│   ├── CustomViewDialog.cs        # 个性视图配置对话框
-│   └── GoToLineDialog.cs          # 跳转到行对话框
-├── docs/                          # 业务逻辑文档
-├── bak/                           # 备份、构建产物、工具
-├── Att/logo.ico                   # 应用图标
-├── CHANGELOG.md                   # 更新日志
-├── VERSION.md                     # 版本信息
-└── README.md                      # 本文件
-```
-
-总代码量约 3400 行（含 XAML）。
-
-----
-
-9. 技术架构
-====
-
-分层
-----
-
-| 层 | 职责 | 实现 |
-|----|------|------|
-| 应用层 | 生命周期、单实例、IPC | Mutex + NamedPipe + 全局异常处理 |
-| UI 层 | 窗口、菜单、快捷键 | XAML + Code-Behind |
-| 编辑器层 | 文本编辑、行号、Tab 缩进 | 自研 ``UserControl``，封装 ``TextBox`` |
-| 渲染层 | Markdown → HTML | Markdig 管道 + 内嵌 CSS |
-| 预览层 | HTML 展示 | WPF ``WebBrowser``（IE Trident） |
-| 服务层 | I/O、剪贴板、持久化 | 静态方法类 |
-| 数据层 | 文档/设置/会话 | POCO，JSON 序列化 |
-
-关键设计决策
-----
-
-- **无 MVVM:** Code-Behind 模式，减少抽象层。快捷键通过
-  ``RoutedUICommand`` + ``KeyBinding`` 注册。
-- **单实例:** 命名 ``Mutex`` 检测，``NamedPipeServerStream`` 转发文件路径。
-  第二实例 ``Environment.Exit(0)`` 快速退出。
-- **异步大文件:** 阈值 500KB。先创建占位标签，后台 ``Task.Run()`` 读取，
-  ``Dispatcher.InvokeAsync`` 回填 UI。
-- **预览防抖:** 150ms ``DispatcherTimer``，内容+主题未变则跳过渲染。
-- **视图状态机:** ``ViewLayout`` record struct 统一描述 7 种视图 + 自定义布局。
-  色条基于 ``_currentViewLayout`` 做三态决策。
-
-依赖
-----
-
-| 包 | 版本 | 用途 |
-|----|------|------|
-| `Markdig <https://github.com/xoofx/markdig>`_ | 0.34.0 | Markdown 解析与 HTML 生成 |
-| `HtmlAgilityPack <https://html-agility-pack.net/>`_ | 1.11.60 | HTML → 纯文本 |
-
-- 目标框架: ``net10.0-windows``
-- WPF: UI
-- Windows Forms: ``FolderBrowserDialog``
-
-----
-
-10. 构建
-====
-
-开发构建::
-
-  dotnet build -c Debug
-
-发布构建::
-
-  dotnet build -c Release
-
-自包含单文件发布::
-
-  dotnet publish -c Release -r win-x64 --self-contained true \
-    -p:PublishSingleFile=true \
-    -p:IncludeNativeLibrariesForSelfExtract=true \
-    -o ./publish
-
-产物: ``publish/MD文本编辑器v2.57.202605242121.exe``，约 174 MB。
-
-源码打包::
-
-  $ver = Get-Date -Format "yyyyMMddHHmm"
-  Compress-Archive -Path "*.csproj","*.xaml","*.cs","Editor","Models","Services","Views","Att","docs","*.md" \
-    -DestinationPath "bak\source\MDEditor-src-$ver.zip" -Force
-
-备份策略详见 `BACKUP.md <BACKUP.md>`_。
-
-----
-
-11. 开发环境
-====
-
-开发软件
-----
-
-本项目使用以下软件进行开发：
-
-| 软件 | 版本 | 用途 |
+| 需求 | 最低 | 推荐 |
 |------|------|------|
-| `Visual Studio Code <https://code.visualstudio.com/>`_ | 稳定版 | 代码编辑、项目浏览 |
-| `.NET 10 SDK <https://dotnet.microsoft.com/download/dotnet/10.0>`_ | 10.0.x | 编译、构建、发布 |
-| `PowerShell 5.1 / 7.x <https://learn.microsoft.com/powershell/>`_ | — | 命令行与构建脚本 |
-| `Git <https://git-scm.com/>`_ | 稳定版 | 版本控制 |
-| `Claude Code <https://claude.ai/code>`_ | CLI v2.x | AI 辅助开发 |
+| 操作系统 | Windows 10 1809+ | Windows 11 |
+| CPU | x64 | x64 |
+| 内存 | 512 MB | 4 GB+ |
+| 磁盘 | 200 MB | 500 MB |
+| .NET 运行时 | 无需安装 | — |
 
-AI 大模型
-----
+---
 
-| 模型 | 提供商 | 上下文 | 主要用途 |
-|------|--------|--------|----------|
-| DeepSeek V4 Pro | DeepSeek | 1M tokens | 代码分析、逻辑梳理、方案设计 |
-| Claude Opus 4.7 | Anthropic | 200K tokens | 架构规划、文档撰写、代码审查 |
-| Claude Sonnet 4.6 | Anthropic | 200K tokens | 代码生成、快速迭代、问题修复 |
+## 🛠 技术栈
 
-Claude Code 通过 VS Code 扩展接入，负责本项目约 95% 的代码生成、
-审查与重构工作。Prompt 复杂度从单行指令到多文件重构不等。
+| 层级 | 技术 | 版本 |
+|------|------|------|
+| 运行时 | .NET 10 | 10.0 |
+| UI 框架 | WPF | .NET 10 |
+| 预览引擎 | WebView2 (Chromium) | 1.0.3124.44 |
+| Markdown | Markdig | 0.34.0 |
+| HTML 处理 | HtmlAgilityPack | 1.11.60 |
+| 语言 | C# 12 | Nullable + ImplicitUsings |
+| 架构 | Code-Behind + Service Layer | ~4,500 行 |
 
-代码风格
-----
+---
 
-- 命名空间: ``MDEditor`` / ``MDEditor.Editor`` / ``MDEditor.Models`` / ``MDEditor.Services``
-- Null 安全: ``<Nullable>enable</Nullable>``
-- XAML 资源: ``DynamicResource``（支持运行时主题切换）
-- 注释: 仅对非显而易见的逻辑添加
+## ⌨️ 快捷键
 
-----
+### 文件 / 编辑
+| 快捷键 | 功能 | | 快捷键 | 功能 |
+|--------|------|------|--------|------|
+| `Ctrl+N` | 新建 | | `Ctrl+Shift+C` | 复制为纯文本 |
+| `Ctrl+O` | 打开 | | `Ctrl+F` | 查找替换 |
+| `Ctrl+S` | 保存 | | `Ctrl+G` | 跳转到行 |
+| `Ctrl+W` | 关闭标签 | | `Ctrl+P` | 打印 |
 
-12. 已知问题
-====
+### 视图 / 主题
+| 快捷键 | 功能 | | 快捷键 | 功能 |
+|--------|------|------|--------|------|
+| `Ctrl+1~7` | 7 种视图布局 | | `Ctrl+Shift+B` | 切换侧边栏 |
+| `Ctrl+Shift+G` | 切换行号 | | `F11` | 全屏 |
+| `Ctrl+Shift+D` | 切换亮/暗主题 | | `Ctrl+加/减/0` | 缩放 |
 
-**预览引擎**
+### 格式 / 移动
+| 快捷键 | 功能 | | 快捷键 | 功能 |
+|--------|------|------|--------|------|
+| `Ctrl+B` / `Ctrl+I` | 粗体/斜体 | | `Ctrl+←` | 标题升级 |
+| `` Ctrl+` `` | 行内代码 | | `Ctrl+→` | 标题降级 |
+| `Ctrl+Shift+1~6` | H1~H6 | | `Ctrl+↑` | 行上移 |
+| `Ctrl+Shift+U` | 无序列表 | | `Ctrl+↓` | 行下移 |
 
-基于 IE Trident 引擎（WPF ``WebBrowser`` 控件），不支持 ``prefers-color-scheme``、
-CSS 自定义属性、``display: grid`` 等现代特性。KaTeX 与 Mermaid 代码仅以
-原始文本形式显示。计划后续支持 WebView2 引擎。
+---
 
-**编码**
+## 📚 文档
 
-所有文件以 UTF-8 读写。不支持其他编码的自动检测。
+| 序号 | 文档 | 说明 |
+|------|------|------|
+| 01 | [系统说明](docs/01%20系统说明.md) | 系统架构、设计原则、子系统说明、开发环境与大模型 |
+| 02 | [版本说明](docs/02%20版本说明.md) | 版本号规则、完整历史、兼容性矩阵、路线图 |
+| 03 | [业务说明](docs/03%20业务说明.md) | 产品设计哲学、核心业务逻辑、会话管理、个性化设计 |
+| 04 | [技术说明](docs/04%20技术说明.md) | 技术栈详解、架构决策、服务层 API、关键子系统 |
+| 05 | [UI说明](docs/05%20UI说明.md) | 设计理念、配色方案、布局规范、工具栏/菜单/预览区 |
+| 06 | [备份说明](docs/06%20备份说明.md) | 备份规范、目录结构、环境恢复、完整性验证 |
+| 07 | [开发日志](docs/07%20开发日志.md) | v3.0~v3.7 完整 CHANGELOG、Keep a Changelog 规范 |
 
-**平台**
+---
 
-仅支持 Windows 10（1809+）/ Windows 11 x64。
+## 📁 项目结构
 
-**启动行为**
+```
+MD编辑器 for Win11/
+├── App.xaml(.cs)                 # 应用程序入口（单实例管控、IPC）
+├── MainWindow.xaml(.cs)          # 主窗口（~2,900 行）
+├── FindReplaceWindow.xaml(.cs)   # 查找/替换窗口
+├── MDEditor.csproj               # .NET 10 项目文件
+├── Editor/MarkdownEditor         # 编辑器控件（TextBox + 行号栏）
+├── Models/                       # 数据模型（Document/SessionDocument/ViewLayout）
+├── Services/                     # 服务层（File/FileManager/Markdown/Settings/Clipboard）
+├── Views/                        # 对话框（CustomView/GoToLine）
+├── Resources/                    # 图标资源（140 个 ICO）
+├── Att/                          # 应用图标
+├── docs/                         # 项目文档（01~07）
+└── bak/                          # 备份归档（源码/发布/图标源文件）
+```
 
-窗口最大化启动，不自动创建空白文档。若上次打开了工作区，自动恢复文件树。
+---
 
-** .NET 10 适配**
+## 🔧 开发
 
-目标框架 ``net10.0-windows``。由于 ````System.Windows.Controls.WebBrowser````
-在 .NET 10 中仍依赖 IE Trident，当系统未安装 IE 组件时（Windows 11 纯净安装）
-预览功能可能不可用。
+| 工具 | 用途 |
+|------|------|
+| VS Code | IDE |
+| .NET SDK 10.0 | 编译构建 |
+| Claude Code | AI 辅助开发 |
 
-----
+| 大模型 | 厂商 | 用途 |
+|--------|------|------|
+| Claude Opus 4.8 | Anthropic | 架构设计、代码审查 |
+| DeepSeek V4 Pro | DeepSeek | 代码生成、重构 |
+| Claude Sonnet 4.6 | Anthropic | 文档编写 |
+| Claude Haiku 4.5 | Anthropic | 快速补全 |
 
-13. 作者
-====
+---
 
-**帅气的锅巴** — 设计、开发、文档。
+## 📊 统计
 
-本软件为个人开发项目，保留所有权利，仅供学习与个人使用。
+| 指标 | 值 | | 指标 | 值 |
+|------|-----|------|------|-----|
+| 代码行数 | ~4,500 | | 服务类 | 5 个 |
+| C# 源文件 | 12 个 | | 快捷键 | 40+ 组 |
+| XAML 文件 | 4 个 | | 已修复缺陷 | 38+ 项 |
+| NuGet 依赖 | 3 个 | | 发布版本 | 7 个 |
 
-问题反馈请通过项目仓库提交 Issue。
+---
+
+## 👤 作者
+
+**帅气的锅巴**
+
+---
+
+<p align="center">
+  <sub>Built with .NET 10 + WPF + WebView2</sub>
+</p>
